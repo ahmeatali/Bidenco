@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "919616938047",
+    "firebase_url": "https://bidenco-48c79.firebaseio.com",
+    "project_id": "bidenco-48c79",
+    "storage_bucket": "bidenco-48c79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919616938047:android:d9f1ba2758274e9f78188a",
+        "android_client_info": {
+          "package_name": "com.ahmetaliyilmaz.aay19.bidenco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919616938047-ett71e5ug4a8rf2nipf2gipg87o72gs8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU5AztHwkjkpC9T3RBpt4J5_ZrFu3OhvI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919616938047-ett71e5ug4a8rf2nipf2gipg87o72gs8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
