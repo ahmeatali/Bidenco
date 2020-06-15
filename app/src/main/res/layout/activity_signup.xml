@@ -10,7 +10,7 @@
         android:id="@+id/semailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="192dp"
         android:ems="10"
         android:hint="E-mail Address"
         android:inputType="textPersonName"
@@ -18,39 +18,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/preButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
-        android:onClick="preButton"
-        android:text="Do you already have account?"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spasswordText" />
-
-    <Button
-        android:id="@+id/signupClicked"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="69dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="24dp"
-        android:onClick="signupClicked"
-        android:text="Sign Up"
-        app:layout_constraintBottom_toTopOf="@+id/preButton"
-        app:layout_constraintEnd_toEndOf="@+id/preButton"
-        app:layout_constraintStart_toStartOf="@+id/spasswordText" />
-
     <EditText
         android:id="@+id/spasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="@+id/semailText"
         app:layout_constraintTop_toBottomOf="@+id/semailText" />
+
+    <Button
+        android:id="@+id/signupClicked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="65dp"
+        android:onClick="signupClicked"
+        android:text="Sign Up"
+        app:layout_constraintEnd_toEndOf="@+id/preButton"
+        app:layout_constraintStart_toStartOf="@+id/spasswordText"
+        app:layout_constraintTop_toBottomOf="@+id/spasswordText" />
+
+    <Switch
+        android:id="@+id/preButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:onClick="preButton"
+        android:text="Do you already have account?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupClicked" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
