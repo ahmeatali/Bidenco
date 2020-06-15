@@ -8,36 +8,34 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class feed_activity extends AppCompatActivity {
-//call firebase
+    //call firebase
     private FirebaseAuth firebaseAuth;
 
-//create option menu for exit
+    //create option menu for exit
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.options_menu,menu);
-
+        menuInflater.inflate(R.menu.options_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
-//define items of menu
+
+    //define items of menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (item.getItemId()== R.id.add_product){
+        if (item.getItemId() == R.id.add_product) {
 
 
-
-        }else if (item.getItemId() == R.id.sign_out){
+        } else if (item.getItemId() == R.id.sign_out) {
 
             firebaseAuth.signOut();
-            Intent intenttoSignUp = new Intent(feed_activity.this,signin_activity.class);
+            Intent intenttoSignUp = new Intent(feed_activity.this, signin_activity.class);
             startActivity(intenttoSignUp);
 
         }
