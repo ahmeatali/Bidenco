@@ -37,7 +37,9 @@ public class feed_activity extends AppCompatActivity {
             firebaseAuth.signOut();
             Intent intenttoSignUp = new Intent(feed_activity.this, signin_activity.class);
             startActivity(intenttoSignUp);
-
+        } else if (item.getItemId() == R.id.support) {
+            Intent support = new Intent(feed_activity.this, SupportActivity.class);
+            startActivity(support);
         }
 
         return super.onOptionsItemSelected(item);

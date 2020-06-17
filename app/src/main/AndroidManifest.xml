@@ -13,6 +13,7 @@
             android:name=".ResetPasswordActivity"
             android:parentActivityName=".signin_activity" />
         <activity android:name=".signup_activity" />
+        <activity android:name=".SupportActivity" />
         <activity android:name=".feed_activity" />
         <activity android:name=".signin_activity">
             <intent-filter>
