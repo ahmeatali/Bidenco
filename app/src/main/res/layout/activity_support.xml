@@ -14,19 +14,10 @@
         android:textColor="#000000"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="top"
-        android:lines="15"
-        android:hint="Message" />
-
     <Button
         android:id="@+id/send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send" />
+        android:text="Email" />
 
 </LinearLayout>
