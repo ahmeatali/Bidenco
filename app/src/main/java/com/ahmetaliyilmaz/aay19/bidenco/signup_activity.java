@@ -47,6 +47,11 @@ public class signup_activity extends AppCompatActivity {
         final String email = semailText.getText().toString();
         String password = spasswordText.getText().toString();
 
+        if (fAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), feed_activity.class));
+            finish();
+        }
+
         fAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
@@ -65,13 +70,13 @@ public class signup_activity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(signup_activity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(signup_activity.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        startActivity(new Intent(getApplicationContext(), feed_activity.class));
     }
 
     public void preButton(View view) {
-        Intent intent = new Intent(signup_activity.this, signin_activity.class);
-        startActivity(intent);
+        startActivity(new Intent(signup_activity.this, signin_activity.class));
     }
 }

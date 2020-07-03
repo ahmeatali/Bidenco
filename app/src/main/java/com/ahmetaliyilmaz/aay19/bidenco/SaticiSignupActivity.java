@@ -1,6 +1,8 @@
 package com.ahmetaliyilmaz.aay19.bidenco;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -50,6 +52,11 @@ public class SaticiSignupActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+        if (fAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), feed_activity.class));
+            finish();
+        }
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +68,41 @@ public class SaticiSignupActivity extends AppCompatActivity {
                 final String phone = sphone.getText().toString();
                 final String email = semail.getText().toString().trim();
                 String password = spassword.getText().toString().trim();
+
+                if (TextUtils.isEmpty(name)) {
+                    sname.setError("İsim boş bırakılamaz.");
+                    return;
+                }
+                if (TextUtils.isEmpty(surname)) {
+                    ssurname.setError("Soy isim boş bırakılamaz.");
+                    return;
+                }
+                if (TextUtils.isEmpty(businessName)) {
+                    sbusinessName.setError("Şirket adı boş bırakılamaz.");
+                    return;
+                }
+                if (TextUtils.isEmpty(vergiNo)) {
+                    svergiNo.setError("Vergi No boş bırakılamaz.");
+                    return;
+                }
+                if (TextUtils.isEmpty(vergiDairesi)) {
+                    svergiDairesi.setError("Vergi Dairesi boş bırakılamaz.");
+                    return;
+                }
+                if (TextUtils.isEmpty(phone)) {
+                    sphone.setError("Telefon boş bırakılamaz.");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(email)) {
+                    semail.setError("Email boş bırakılamaz.");
+                    return;
+                }
+                if (TextUtils.isEmpty(password)) {
+                    spassword.setError("Şifre boş bırakılamaz.");
+                    return;
+                }
+
 
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -102,6 +144,7 @@ public class SaticiSignupActivity extends AppCompatActivity {
                                     Log.d(TAG, "onFailure: " + e.toString());
                                 }
                             });
+                            startActivity(new Intent(getApplicationContext(), feed_activity.class));
                         } else {
                             Toast.makeText(SaticiSignupActivity.this, "Error ! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }
