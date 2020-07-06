@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/*
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -23,6 +23,7 @@ import com.facebook.appevents.AppEventsLogger;
 
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+*/
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -42,7 +43,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class signin_activity extends AppCompatActivity {
 
-    private CallbackManager mCallbackManager;
+   // private CallbackManager mCallbackManager;
     //call firebase
     private FirebaseAuth firebaseAuth;
     //call text and password from activity signin xml
