@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -55,6 +56,15 @@ public class signin_activity extends AppCompatActivity {
         //export to string email and password information
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
+
+        if (TextUtils.isEmpty(email)) {
+            emailText.setError("Email boş bırakılamaz.");
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            passwordText.setError("Şifre boş bırakılamaz.");
+            return;
+        }
         //define firebase in signin clicked and check to success
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
