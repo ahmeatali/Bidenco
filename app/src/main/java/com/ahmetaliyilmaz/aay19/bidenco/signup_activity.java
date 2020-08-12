@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,32 +29,42 @@ public class signup_activity extends AppCompatActivity {
         spasswordText = findViewById(R.id.spasswordText);
     }
 
-    public void signupClicked (View view){
+    public void signupClicked(View view) {
 
         fAuth = FirebaseAuth.getInstance();
         String email = semailText.getText().toString();
         String password = spasswordText.getText().toString();
 
-        fAuth.createUserWithEmailAndPassword(email,password)
-                  .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                Toast.makeText(signup_activity.this,"User Created",Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(email)) {
+            semailText.setError("Email boş bırakılamaz.");
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            spasswordText.setError("Şifre boş bırakılamaz.");
+            return;
+        }
 
-                Intent intent = new Intent(signup_activity.this,feed_activity.class);
-                startActivity(intent);
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+        fAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        Toast.makeText(signup_activity.this, "User Created", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(signup_activity.this, feed_activity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
 
-                Toast.makeText(signup_activity.this,e.getLocalizedMessage().toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(signup_activity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
 
             }
         });
     }
-    public void preButton (View view){
+
+    public void preButton(View view) {
 
         Intent intent = new Intent(signup_activity.this, signin_activity.class);
         startActivity(intent);
