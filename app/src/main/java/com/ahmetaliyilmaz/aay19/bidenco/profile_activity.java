@@ -1,57 +1,56 @@
 package com.ahmetaliyilmaz.aay19.bidenco;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class profile_activity extends AppCompatActivity {
 
-    ImageView imageView;
+    TextView sname, ssurname, sbusinessName, svergiNo, svergiDairesi, sphone, semail;
 
-    TextView name, email,id;
-
-    Button confirm;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        imageView = findViewById(R.id.imageView);
-        name = findViewById(R.id.textName);
-        email = findViewById(R.id.textEmail);
-        confirm = findViewById(R.id.button);
+        sname = findViewById(R.id.profileName);
+        ssurname = findViewById(R.id.profileSurname);
+        sbusinessName = findViewById(R.id.profileBusinessName);
+        svergiNo = findViewById(R.id.profileVergiNo);
+        svergiDairesi = findViewById(R.id.profileVergiDairesi);
+        sphone = findViewById(R.id.profilePhone);
+        semail = findViewById(R.id.profileEmail);
 
-        confirm.setOnClickListener(new View.OnClickListener() {
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
+        userId = fAuth.getCurrentUser().getUid();
+
+        DocumentReference documentReference = fStore.collection("users").document(userId);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(profile_activity.this,feed_activity.class);
-                startActivity(intent);
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                sname.setText(documentSnapshot.getString("name"));
+                ssurname.setText(documentSnapshot.getString("surname"));
+                sbusinessName.setText(documentSnapshot.getString("businessName"));
+                svergiNo.setText(documentSnapshot.getString("vergiNo"));
+                svergiDairesi.setText(documentSnapshot.getString("vergiDairesi"));
+                sphone.setText(documentSnapshot.getString("phone"));
+                semail.setText(documentSnapshot.getString("email"));
             }
         });
-
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personEmail = acct.getEmail();
-            Uri personPhoto = acct.getPhotoUrl();
-
-            name.setText(personName);
-            email.setText(personEmail);
-
-
-            Glide.with(this).load(String.valueOf(personPhoto)).into(imageView);
-        }
-
     }
 }

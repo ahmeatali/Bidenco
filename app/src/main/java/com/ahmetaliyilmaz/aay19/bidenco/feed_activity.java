@@ -41,6 +41,10 @@ public class feed_activity extends AppCompatActivity {
             Intent support = new Intent(feed_activity.this, SupportActivity.class);
             startActivity(support);
         }
+        else if (item.getItemId() == R.id.profile) {
+            Intent support = new Intent(feed_activity.this, profile_activity.class);
+            startActivity(support);
+        }
 
         return super.onOptionsItemSelected(item);
     }

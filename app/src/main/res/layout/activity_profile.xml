@@ -10,39 +10,106 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginBottom="71dp"
-        app:layout_constraintBottom_toTopOf="@+id/textName"
-        app:layout_constraintStart_toStartOf="@+id/textName"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="16dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textEmail"
+        android:id="@+id/profileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textName"
-        app:layout_constraintTop_toBottomOf="@+id/textName" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="160dp"
-        android:text="Doğrula"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="192dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="İsim"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor,MissingConstraints" />
 
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/profileSurname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="312dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="Soyisim"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/profileName"
+        app:layout_constraintTop_toBottomOf="@+id/profileName"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/profileBusinessName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Şirket Adı"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/profileSurname"
+        app:layout_constraintTop_toBottomOf="@+id/profileSurname" />
+
+    <TextView
+        android:id="@+id/profileVergiNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Vergi No"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/profileBusinessName"
+        app:layout_constraintTop_toBottomOf="@+id/profileBusinessName" />
+
+    <TextView
+        android:id="@+id/profileVergiDairesi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="Vergi Dairesi"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/profileVergiNo"
+        app:layout_constraintTop_toBottomOf="@+id/profileVergiNo" />
+
+    <TextView
+        android:id="@+id/profilePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="Telefon"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="@+id/profileVergiDairesi"
+        app:layout_constraintTop_toBottomOf="@+id/profileVergiDairesi" />
+
+    <TextView
+        android:id="@+id/profileEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/profilePhone"
+        app:layout_constraintTop_toBottomOf="@+id/profilePhone" />
+
+
+    <!--    <Button-->
+    <!--        android:id="@+id/button"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginBottom="160dp"-->
+    <!--        android:text="Doğrula"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -71,5 +71,9 @@ public class signup_activity extends AppCompatActivity {
 
     }
 
+    public void saticiUyelikGecis(View view) {
+        Intent intent = new Intent(signup_activity.this, SaticiSignupActivity.class);
+        startActivity(intent);
+    }
 }
 

@@ -4,6 +4,9 @@
         android:id="@+id/add_product"
         android:title="Add Product" />
     <item
+        android:id="@+id/profile"
+        android:title="Profile" />
+    <item
         android:id="@+id/support"
         android:title="Support" />
     <item
