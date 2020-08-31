@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -74,52 +75,35 @@ public class ProfileActivity extends AppCompatActivity {
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                sname.setText(documentSnapshot.getString("name"));
-                ssurname.setText(documentSnapshot.getString("surname"));
-                sbusinessName.setText(documentSnapshot.getString("businessName"));
-                svergiNo.setText(documentSnapshot.getString("vergiNo"));
-                svergiDairesi.setText(documentSnapshot.getString("vergiDairesi"));
-                sphone.setText(documentSnapshot.getString("phone"));
-                semail.setText(documentSnapshot.getString("email"));
+                if (documentSnapshot.exists()) {
+                    sname.setText(documentSnapshot.getString("name"));
+                    ssurname.setText(documentSnapshot.getString("surname"));
+                    sbusinessName.setText(documentSnapshot.getString("businessName"));
+                    svergiNo.setText(documentSnapshot.getString("vergiNo"));
+                    svergiDairesi.setText(documentSnapshot.getString("vergiDairesi"));
+                    sphone.setText(documentSnapshot.getString("phone"));
+                    semail.setText(documentSnapshot.getString("email"));
+                } else {
+                    Log.d("tag", "onEvent:Document do not exists");
+                }
             }
         });
         changeProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGalleryIntent, 1000);
-            }
-        });
-    }
+//                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(openGalleryIntent, 1000);
+                Intent i = new Intent(view.getContext(), EditProfileActivity.class);
+                i.putExtra("name", sname.getText().toString());
+                i.putExtra("surname", ssurname.getText().toString());
+                i.putExtra("businessName", sbusinessName.getText().toString());
+                i.putExtra("vergiNo", svergiNo.getText().toString());
+                i.putExtra("vergiDairesi", svergiDairesi.getText().toString());
+                i.putExtra("phone", sphone.getText().toString());
+                i.putExtra("email", semail.getText().toString());
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000) {
-            if (resultCode == Activity.RESULT_OK) {
-                Uri imageUri = data.getData();
-                // profileImage.setImageURI(imageUri);
-                uploadImageToFirebase(imageUri);
-            }
-        }
-    }
+                startActivity(i);
 
-    private void uploadImageToFirebase(Uri imageUri) {
-        final StorageReference fileRef = storageReference.child("users/" + fAuth.getCurrentUser().getUid() + "/profile.jpg");
-        fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Picasso.get().load(uri).into(profileImage);
-                    }
-                });
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ProfileActivity.this, "Failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
