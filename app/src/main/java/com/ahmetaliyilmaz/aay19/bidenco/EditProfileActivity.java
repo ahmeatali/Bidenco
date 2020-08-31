@@ -31,7 +31,6 @@ import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    public static final String TAG = "TAG";
     EditText profileName, profileSurname, profileBusinessName, profileVergiNo, profileVergiDairesi, profilePhone, profileEmail;
     ImageView profileImageView;
     Button saveBtn;
@@ -125,7 +124,6 @@ public class EditProfileActivity extends AppCompatActivity {
                                 finish();
                             }
                         });
-
                         Toast.makeText(EditProfileActivity.this, "Email is changed", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -136,8 +134,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 });
             }
         });
-
-
     }
 
     @Override
@@ -146,7 +142,6 @@ public class EditProfileActivity extends AppCompatActivity {
         if (requestCode == 1000) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri imageUri = data.getData();
-                // profileImage.setImageURI(imageUri);
                 uploadImageToFirebase(imageUri);
             }
         }

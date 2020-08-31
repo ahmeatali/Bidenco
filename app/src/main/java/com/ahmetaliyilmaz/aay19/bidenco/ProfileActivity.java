@@ -1,22 +1,17 @@
 package com.ahmetaliyilmaz.aay19.bidenco;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,7 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -68,7 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
         userId = fAuth.getCurrentUser().getUid();
 
         DocumentReference documentReference = fStore.collection("users").document(userId);
@@ -91,8 +84,6 @@ public class ProfileActivity extends AppCompatActivity {
         changeProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(openGalleryIntent, 1000);
                 Intent i = new Intent(view.getContext(), EditProfileActivity.class);
                 i.putExtra("name", sname.getText().toString());
                 i.putExtra("surname", ssurname.getText().toString());
@@ -103,7 +94,6 @@ public class ProfileActivity extends AppCompatActivity {
                 i.putExtra("email", semail.getText().toString());
 
                 startActivity(i);
-
             }
         });
     }
