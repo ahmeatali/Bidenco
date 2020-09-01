@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".EditProfileActivity">
 
     <ImageView
-        android:id="@+id/profileImage"
+        android:id="@+id/editProfileImage"
         android:layout_width="140dp"
         android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,8 +17,8 @@
         tools:layout_editor_absoluteX="135dp"
         tools:layout_editor_absoluteY="55dp" />
 
-    <TextView
-        android:id="@+id/profileName"
+    <EditText
+        android:id="@+id/editProfileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -27,12 +27,12 @@
         android:hint="İsim"
         android:inputType="textPersonName"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/profileImage"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage"
+        app:layout_constraintStart_toStartOf="@+id/editProfileImage"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileImage"
         tools:ignore="LabelFor,MissingConstraints" />
 
-    <TextView
-        android:id="@+id/profileSurname"
+    <EditText
+        android:id="@+id/editProfileSurname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -40,45 +40,45 @@
         android:ems="10"
         android:hint="Soyisim"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/profileName"
-        app:layout_constraintTop_toBottomOf="@+id/profileName"
+        app:layout_constraintStart_toStartOf="@+id/editProfileName"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileName"
         tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/profileBusinessName"
+    <EditText
+        android:id="@+id/editProfileBusinessName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Şirket Adı"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/profileSurname"
-        app:layout_constraintTop_toBottomOf="@+id/profileSurname" />
+        app:layout_constraintStart_toStartOf="@+id/editProfileSurname"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileSurname" />
 
-    <TextView
-        android:id="@+id/profileVergiNo"
+    <EditText
+        android:id="@+id/editProfileVergiNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Vergi No"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/profileBusinessName"
-        app:layout_constraintTop_toBottomOf="@+id/profileBusinessName" />
+        app:layout_constraintStart_toStartOf="@+id/editProfileBusinessName"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileBusinessName" />
 
-    <TextView
-        android:id="@+id/profileVergiDairesi"
+    <EditText
+        android:id="@+id/editProfileVergiDairesi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Vergi Dairesi"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/profileVergiNo"
-        app:layout_constraintTop_toBottomOf="@+id/profileVergiNo" />
+        app:layout_constraintStart_toStartOf="@+id/editProfileVergiNo"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileVergiNo" />
 
-    <TextView
-        android:id="@+id/profilePhone"
+    <EditText
+        android:id="@+id/editProfilePhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -86,11 +86,11 @@
         android:ems="10"
         android:hint="Telefon"
         android:inputType="phone"
-        app:layout_constraintStart_toStartOf="@+id/profileVergiDairesi"
-        app:layout_constraintTop_toBottomOf="@+id/profileVergiDairesi" />
+        app:layout_constraintStart_toStartOf="@+id/editProfileVergiDairesi"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileVergiDairesi" />
 
-    <TextView
-        android:id="@+id/profileEmail"
+    <EditText
+        android:id="@+id/editProfileEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -98,18 +98,18 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/profilePhone"
-        app:layout_constraintTop_toBottomOf="@+id/profilePhone" />
+        app:layout_constraintStart_toStartOf="@+id/editProfilePhone"
+        app:layout_constraintTop_toBottomOf="@+id/editProfilePhone" />
 
     <Button
-        android:id="@+id/changeProfile"
+        android:id="@+id/editSaveProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Edit Profile"
+        android:text="Kaydet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/profileEmail"
-        app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
+        app:layout_constraintStart_toStartOf="@+id/editProfileEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
