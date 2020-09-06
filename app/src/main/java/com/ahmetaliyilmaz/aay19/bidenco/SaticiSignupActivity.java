@@ -53,7 +53,7 @@ public class SaticiSignupActivity extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
 
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), feed_activity.class));
+            startActivity(new Intent(getApplicationContext(), SaticiFeedActivity.class));
             finish();
         }
 
@@ -68,6 +68,7 @@ public class SaticiSignupActivity extends AppCompatActivity {
                 final String phone = sphone.getText().toString();
                 final String email = semail.getText().toString().trim();
                 String password = spassword.getText().toString().trim();
+                final String type = "satici";
 
                 if (TextUtils.isEmpty(name)) {
                     sname.setError("İsim boş bırakılamaz.");
@@ -132,6 +133,7 @@ public class SaticiSignupActivity extends AppCompatActivity {
                             user.put("vergiDairesi", vergiDairesi);
                             user.put("email", email);
                             user.put("phone", phone);
+                            user.put("type", type);
 
                             doc.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -144,7 +146,7 @@ public class SaticiSignupActivity extends AppCompatActivity {
                                     Log.d(TAG, "onFailure: " + e.toString());
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(), feed_activity.class));
+                            startActivity(new Intent(getApplicationContext(), SaticiFeedActivity.class));
                         } else {
                             Toast.makeText(SaticiSignupActivity.this, "Error ! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }
