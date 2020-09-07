@@ -11,18 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".AliciEditProfileActivity"></activity>
+        <activity android:name=".AliciFeedActivity" />
+        <activity android:name=".AliciProfileActivity" />
+        <activity android:name=".SaticiEditProfileActivity" />
+        <activity android:name=".SaticiProfileActivity" />
         <activity
             android:name=".ResetPasswordActivity"
-            android:parentActivityName=".signin_activity" />
-        <activity android:name=".signup_activity" />
+            android:parentActivityName=".SigninActivity" />
+        <activity android:name=".AliciSignupActivity" />
         <activity
             android:name=".SaticiSignupActivity"
-            android:parentActivityName=".signup_activity" />
+            android:parentActivityName=".AliciSignupActivity" />
         <activity android:name=".SupportActivity" />
-        <activity android:name=".feed_activity" />
-        <activity android:name=".signin_activity">
+        <activity android:name=".SaticiFeedActivity" />
+        <activity android:name=".SigninActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

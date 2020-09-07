@@ -29,7 +29,7 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class SaticiEditProfileActivity extends AppCompatActivity {
 
     EditText profileName, profileSurname, profileBusinessName, profileVergiNo, profileVergiDairesi, profilePhone, profileEmail;
     ImageView profileImageView;
@@ -42,7 +42,7 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(R.layout.activity_satici_edit_profile);
 
         Intent data = getIntent();
         String name = data.getStringExtra("name");
@@ -99,7 +99,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         profileBusinessName.getText().toString().isEmpty() || profileVergiNo.getText().toString().isEmpty() ||
                         profileVergiDairesi.getText().toString().isEmpty() || profilePhone.getText().toString().isEmpty() ||
                         profileEmail.getText().toString().isEmpty()) {
-                    Toast.makeText(EditProfileActivity.this, "One or many fields are empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SaticiEditProfileActivity.this, "One or many fields are empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -119,17 +119,16 @@ public class EditProfileActivity extends AppCompatActivity {
                         docRef.update(edited).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(EditProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                                Toast.makeText(SaticiEditProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), SaticiProfileActivity.class));
                                 finish();
                             }
                         });
-                        Toast.makeText(EditProfileActivity.this, "Email is changed", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SaticiEditProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

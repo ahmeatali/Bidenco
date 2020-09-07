@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class feed_activity extends AppCompatActivity {
+public class SaticiFeedActivity extends AppCompatActivity {
     //call firebase
     private FirebaseAuth firebaseAuth;
 
@@ -20,7 +20,7 @@ public class feed_activity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.options_menu, menu);
+        menuInflater.inflate(R.menu.satici_options_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -35,14 +35,14 @@ public class feed_activity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.sign_out) {
 
             firebaseAuth.signOut();
-            Intent intenttoSignUp = new Intent(feed_activity.this, signin_activity.class);
+            Intent intenttoSignUp = new Intent(SaticiFeedActivity.this, SigninActivity.class);
             startActivity(intenttoSignUp);
         } else if (item.getItemId() == R.id.support) {
-            Intent support = new Intent(feed_activity.this, SupportActivity.class);
+            Intent support = new Intent(SaticiFeedActivity.this, SupportActivity.class);
             startActivity(support);
         }
         else if (item.getItemId() == R.id.profile) {
-            Intent support = new Intent(feed_activity.this, ProfileActivity.class);
+            Intent support = new Intent(SaticiFeedActivity.this, SaticiProfileActivity.class);
             startActivity(support);
         }
 
@@ -52,7 +52,7 @@ public class feed_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+        setContentView(R.layout.activity_satici_feed);
 
         firebaseAuth = FirebaseAuth.getInstance();
     }

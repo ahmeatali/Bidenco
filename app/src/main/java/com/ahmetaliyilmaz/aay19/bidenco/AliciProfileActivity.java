@@ -23,9 +23,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
-public class ProfileActivity extends AppCompatActivity {
+public class AliciProfileActivity extends AppCompatActivity {
 
-    TextView sname, ssurname, sbusinessName, svergiNo, svergiDairesi, sphone, semail;
+    TextView sname, ssurname, susername, sbirthday, saddress, semail;
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -37,18 +37,17 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_alici_profile);
 
-        sname = findViewById(R.id.profileName);
-        ssurname = findViewById(R.id.profileSurname);
-        sbusinessName = findViewById(R.id.profileBusinessName);
-        svergiNo = findViewById(R.id.profileVergiNo);
-        svergiDairesi = findViewById(R.id.profileVergiDairesi);
-        sphone = findViewById(R.id.profilePhone);
-        semail = findViewById(R.id.profileEmail);
+        sname = findViewById(R.id.profileAliciName);
+        ssurname = findViewById(R.id.profileAliciSurname);
+        susername = findViewById(R.id.profileAliciUsername);
+        sbirthday = findViewById(R.id.profileAliciBirthday);
+        saddress = findViewById(R.id.profileAliciAddress);
+        semail = findViewById(R.id.profileAliciEmail);
 
-        profileImage = findViewById(R.id.profileImage);
-        changeProfileImage = findViewById(R.id.changeProfile);
+        profileImage = findViewById(R.id.profileAliciImage);
+        changeProfileImage = findViewById(R.id.changeAliciProfile);
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -71,10 +70,9 @@ public class ProfileActivity extends AppCompatActivity {
                 if (documentSnapshot.exists()) {
                     sname.setText(documentSnapshot.getString("name"));
                     ssurname.setText(documentSnapshot.getString("surname"));
-                    sbusinessName.setText(documentSnapshot.getString("businessName"));
-                    svergiNo.setText(documentSnapshot.getString("vergiNo"));
-                    svergiDairesi.setText(documentSnapshot.getString("vergiDairesi"));
-                    sphone.setText(documentSnapshot.getString("phone"));
+                    susername.setText(documentSnapshot.getString("username"));
+                    sbirthday.setText(documentSnapshot.getString("birthday"));
+                    saddress.setText(documentSnapshot.getString("address"));
                     semail.setText(documentSnapshot.getString("email"));
                 } else {
                     Log.d("tag", "onEvent:Document do not exists");
@@ -84,13 +82,12 @@ public class ProfileActivity extends AppCompatActivity {
         changeProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(view.getContext(), EditProfileActivity.class);
+                Intent i = new Intent(view.getContext(), AliciEditProfileActivity.class);
                 i.putExtra("name", sname.getText().toString());
                 i.putExtra("surname", ssurname.getText().toString());
-                i.putExtra("businessName", sbusinessName.getText().toString());
-                i.putExtra("vergiNo", svergiNo.getText().toString());
-                i.putExtra("vergiDairesi", svergiDairesi.getText().toString());
-                i.putExtra("phone", sphone.getText().toString());
+                i.putExtra("username", susername.getText().toString());
+                i.putExtra("birthday", sbirthday.getText().toString());
+                i.putExtra("address", saddress.getText().toString());
                 i.putExtra("email", semail.getText().toString());
 
                 startActivity(i);
