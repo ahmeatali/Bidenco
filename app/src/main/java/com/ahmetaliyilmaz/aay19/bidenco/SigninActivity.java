@@ -69,9 +69,9 @@ public class SigninActivity extends AppCompatActivity implements GoogleApiClient
                 signIn();
             }
         });
-        if (firebaseAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), SaticiFeedActivity.class));
-        }
+//        if (firebaseAuth.getCurrentUser() != null) {
+//            startActivity(new Intent(getApplicationContext(), SaticiFeedActivity.class));
+//        }
     }
 
     private void signIn() {

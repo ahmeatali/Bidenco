@@ -96,7 +96,7 @@ public class AliciSignupActivity extends AppCompatActivity {
                             Log.d(TAG, "onFailure: " + e.toString());
                         }
                     });
-                    startActivity(new Intent(getApplicationContext(), SaticiFeedActivity.class));
+                    startActivity(new Intent(getApplicationContext(), AliciFeedActivity.class));
                 } else {
                     Toast.makeText(AliciSignupActivity.this, "Error ! " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
