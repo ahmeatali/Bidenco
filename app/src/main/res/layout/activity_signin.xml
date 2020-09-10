@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         android:onClick="signInClicked"
         android:text="Sign In"
+        android:textColor="#fff"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintStart_toStartOf="@+id/guideline14"
