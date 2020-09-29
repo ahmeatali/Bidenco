@@ -31,6 +31,8 @@ public class SaticiFeedActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.add_product) {
 
+            Intent intenttoAddProduct = new Intent(SaticiFeedActivity.this, SaticiUrunEkleme.class);
+            startActivity(intenttoAddProduct);
 
         } else if (item.getItemId() == R.id.sign_out) {
 
