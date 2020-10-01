@@ -3,6 +3,9 @@
     package="com.ahmetaliyilmaz.aay19.bidenco">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE">
+    </uses-permission>
 
     <application
         android:allowBackup="true"
@@ -11,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AliciEditProfileActivity"></activity>
+        <activity android:name=".SaticiUrunEkleme"></activity>
+        <activity android:name=".AliciEditProfileActivity" />
         <activity android:name=".AliciFeedActivity" />
         <activity android:name=".AliciProfileActivity" />
         <activity android:name=".SaticiEditProfileActivity" />
