@@ -126,7 +126,7 @@ public class SaticiFeedActivity extends AppCompatActivity {
                         String productCommand = (String) data.get("product_command");
                         String downloadUrl = (String) data.get("downloadUrl");
 
-                        System.out.println(productName);
+
 
                         userCommentFromFB.add(productCommand);
                         userImageFromFB.add(downloadUrl);
