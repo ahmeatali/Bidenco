@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -49,10 +51,13 @@ public class SaticiUrunEkleme extends AppCompatActivity {
     EditText productName;
     EditText commandText;
     Uri imageData;
+    String userID;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+
+    public HashMap<String, Object> postData = new HashMap<>();
 
 
 
@@ -68,10 +73,50 @@ public class SaticiUrunEkleme extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
-        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance().getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+        dataGetFromFirestore();
+
+        StorageReference profileRef = storageReference.child("users/" + firebaseAuth.getCurrentUser().getUid() + "/profile.jpg");
+
+
     }
+
+
+
+    public void dataGetFromFirestore (){
+
+        userID = firebaseAuth.getCurrentUser().getUid();
+        DocumentReference documentReference = firebaseFirestore.collection("users").document(userID);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()){
+                    String businessName = value.getString("businessName");
+                    String eMail =  value.getString("email");
+                    String nameSeller = value.getString("name");
+                    String surnameSeller = value.getString("surname");
+                    String phoneSeller = value.getString("phone");
+                    String vergiDairesi = value.getString("vergiDairesi");
+                    String vergiNo = value.getString("vergiNo");
+
+                    postData.put("businessName", businessName);
+                    postData.put("email", eMail);
+                    postData.put("sellerName",nameSeller);
+                    postData.put("sellerSurname",surnameSeller);
+                    postData.put("phoneNumber",phoneSeller);
+                    postData.put("vergiDairesi",vergiDairesi);
+                    postData.put("vergiNo", vergiNo);
+
+                }else{
+                    Log.d("tag", "onEvent:Document do not exists");
+                }
+
+            }
+        });
+    }
+
 
         public void addProduct(View view){
 
@@ -95,16 +140,18 @@ public class SaticiUrunEkleme extends AppCompatActivity {
                             String name  = productName.getText().toString();
                             String command = commandText.getText().toString();
 
-                            HashMap<String, Object> postData = new HashMap<>();
                             postData.put("userEmail", userEmail);
                             postData.put("downloadUrl",downloadUrl);
                             postData.put("product_name", name);
                             postData.put("product_command", command);
                             postData.put("date", FieldValue.serverTimestamp());
 
+                            dataGetFromFirestore();
+
                             firebaseFirestore.collection("Post").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
+
 
                                     Intent intent = new Intent(SaticiUrunEkleme.this,SaticiFeedActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
