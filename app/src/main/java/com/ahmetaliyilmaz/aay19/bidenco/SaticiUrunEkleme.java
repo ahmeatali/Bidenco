@@ -17,8 +17,11 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,18 +47,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class SaticiUrunEkleme extends AppCompatActivity {
+public class SaticiUrunEkleme extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Bitmap selectedImage;
     ImageView imageView;
     EditText productName;
     EditText commandText;
+    EditText priceText;
     Uri imageData;
     String userID;
+    Spinner spinner;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+    private String item;
 
     public HashMap<String, Object> postData = new HashMap<>();
 
@@ -70,6 +76,12 @@ public class SaticiUrunEkleme extends AppCompatActivity {
         imageView = findViewById(R.id.addImage);
         productName = findViewById(R.id.productName);
         commandText = findViewById(R.id.productCommand);
+        spinner = findViewById(R.id.spinner);
+        priceText= findViewById(R.id.priceText);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.categories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
@@ -139,12 +151,16 @@ public class SaticiUrunEkleme extends AppCompatActivity {
                             String userEmail = firebaseUser.getEmail();
                             String name  = productName.getText().toString();
                             String command = commandText.getText().toString();
+                            String categories = item;
+                            String price = priceText.getText().toString();
 
                             postData.put("userEmail", userEmail);
                             postData.put("downloadUrl",downloadUrl);
                             postData.put("product_name", name);
                             postData.put("product_command", command);
                             postData.put("date", FieldValue.serverTimestamp());
+                            postData.put("categories",categories);
+                            postData.put("price",price);
 
                             dataGetFromFirestore();
 
@@ -229,5 +245,15 @@ public class SaticiUrunEkleme extends AppCompatActivity {
          }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        item = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
