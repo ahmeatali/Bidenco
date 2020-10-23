@@ -3,6 +3,19 @@
 
     <string name="facebook_app_id">299055597906015</string>
     <string name="fb_login_protocol_scheme">fb299055597906015</string>
+    
+    <string-array name="categories">
+        <item>Tespih</item>
+        <item>Antika</item>
+        <item>Sahaf</item>
+        <item>Plak</item>
+        <item>Sanat Eserleri</item>
+        <item>Müzik Aletleri</item>
+        <item>El İşi Ürünler</item>
+        <item>Takı ve Mücevher</item>
+        <item>Mutfak Gereçleri</item>
+        <item>Oyun/Kaset/CD</item>
+    </string-array>
 
 
     <!-- TODO: Remove or change this placeholder text -->

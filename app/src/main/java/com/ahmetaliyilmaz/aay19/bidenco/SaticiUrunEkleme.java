@@ -15,37 +15,55 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
-public class SaticiUrunEkleme extends AppCompatActivity {
+public class SaticiUrunEkleme extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Bitmap selectedImage;
     ImageView imageView;
     EditText productName;
     EditText commandText;
+    EditText priceText;
     Uri imageData;
+    String userID;
+    Spinner spinner;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+    private String item;
+
+    public HashMap<String, Object> postData = new HashMap<>();
 
 
 
@@ -58,15 +76,61 @@ public class SaticiUrunEkleme extends AppCompatActivity {
         imageView = findViewById(R.id.addImage);
         productName = findViewById(R.id.productName);
         commandText = findViewById(R.id.productCommand);
+        spinner = findViewById(R.id.spinner);
+        priceText= findViewById(R.id.priceText);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.categories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
-        firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance().getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
+
+        dataGetFromFirestore();
+
+        StorageReference profileRef = storageReference.child("users/" + firebaseAuth.getCurrentUser().getUid() + "/profile.jpg");
+
 
     }
 
-    public void addProduct(View view){
+
+
+    public void dataGetFromFirestore (){
+
+        userID = firebaseAuth.getCurrentUser().getUid();
+        DocumentReference documentReference = firebaseFirestore.collection("users").document(userID);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()){
+                    String businessName = value.getString("businessName");
+                    String eMail =  value.getString("email");
+                    String nameSeller = value.getString("name");
+                    String surnameSeller = value.getString("surname");
+                    String phoneSeller = value.getString("phone");
+                    String vergiDairesi = value.getString("vergiDairesi");
+                    String vergiNo = value.getString("vergiNo");
+
+                    postData.put("businessName", businessName);
+                    postData.put("email", eMail);
+                    postData.put("sellerName",nameSeller);
+                    postData.put("sellerSurname",surnameSeller);
+                    postData.put("phoneNumber",phoneSeller);
+                    postData.put("vergiDairesi",vergiDairesi);
+                    postData.put("vergiNo", vergiNo);
+
+                }else{
+                    Log.d("tag", "onEvent:Document do not exists");
+                }
+
+            }
+        });
+    }
+
+
+        public void addProduct(View view){
 
         if (imageData != null) {
 
@@ -87,17 +151,23 @@ public class SaticiUrunEkleme extends AppCompatActivity {
                             String userEmail = firebaseUser.getEmail();
                             String name  = productName.getText().toString();
                             String command = commandText.getText().toString();
+                            String categories = item;
+                            String price = priceText.getText().toString();
 
-                            HashMap<String, Object> postData = new HashMap<>();
                             postData.put("userEmail", userEmail);
                             postData.put("downloadUrl",downloadUrl);
                             postData.put("product_name", name);
                             postData.put("product_command", command);
                             postData.put("date", FieldValue.serverTimestamp());
+                            postData.put("categories",categories);
+                            postData.put("price",price);
+
+                            dataGetFromFirestore();
 
                             firebaseFirestore.collection("Post").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
+
 
                                     Intent intent = new Intent(SaticiUrunEkleme.this,SaticiFeedActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -175,5 +245,15 @@ public class SaticiUrunEkleme extends AppCompatActivity {
          }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        item = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

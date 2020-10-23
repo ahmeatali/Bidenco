@@ -18,11 +18,18 @@ public class SaticiFeedRecyclerAdapter extends RecyclerView.Adapter<SaticiFeedRe
     private ArrayList<String> productNameList;
     private ArrayList<String> productCommentList;
     private ArrayList<String> productImageList;
+    private ArrayList<String> priceList;
+    private ArrayList<String> saticiList;
+    private ArrayList<String> categoryList;
 
-    public SaticiFeedRecyclerAdapter(ArrayList<String> productNameList, ArrayList<String> productCommentList, ArrayList<String> productImageList) {
+    public SaticiFeedRecyclerAdapter(ArrayList<String> productNameList, ArrayList<String> productCommentList, ArrayList<String> productImageList, ArrayList<String> priceList,ArrayList<String> categoryList,ArrayList<String> saticiList) {
         this.productNameList = productNameList;
         this.productCommentList = productCommentList;
         this.productImageList = productImageList;
+        this.priceList = priceList;
+        this.saticiList = saticiList;
+        this.categoryList = categoryList;
+
     }
 
     @NonNull
@@ -41,6 +48,9 @@ public class SaticiFeedRecyclerAdapter extends RecyclerView.Adapter<SaticiFeedRe
         holder.productName.setText(productNameList.get(position));
         holder.productComment.setText(productCommentList.get(position));
         Picasso.get().load(productImageList.get(position)).into(holder.imageView);
+        holder.fiyatText.setText(priceList.get(position));
+        holder.sellerName.setText(saticiList.get(position));
+        holder.category.setText(categoryList.get(position));
     }
 
     @Override
@@ -53,6 +63,9 @@ public class SaticiFeedRecyclerAdapter extends RecyclerView.Adapter<SaticiFeedRe
         ImageView imageView;
         TextView productName;
         TextView productComment;
+        TextView fiyatText;
+        TextView sellerName;
+        TextView category;
 
 
         public PostHolder(@NonNull View itemView) {
@@ -62,6 +75,9 @@ public class SaticiFeedRecyclerAdapter extends RecyclerView.Adapter<SaticiFeedRe
             imageView = itemView.findViewById(R.id.product_imageview);
             productName = itemView.findViewById(R.id.product_name_text);
             productComment = itemView.findViewById(R.id.product_comment_text);
+            fiyatText = itemView.findViewById(R.id.fiyatText);
+            sellerName = itemView.findViewById(R.id.sellerName);
+            category = itemView.findViewById(R.id.category);
         }
     }
 }
