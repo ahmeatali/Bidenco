@@ -39,6 +39,9 @@ public class SaticiFeedActivity extends AppCompatActivity {
     ArrayList<String> userNameFromFB;
     ArrayList<String> userCommentFromFB;
     ArrayList<String> userImageFromFB;
+    ArrayList<String> priceListFromFB;
+    ArrayList<String> saticiAdiFromFB;
+    ArrayList<String> categoryFromFB;
     SaticiFeedRecyclerAdapter saticiFeedRecyclerAdapter;
 
 
@@ -91,12 +94,15 @@ public class SaticiFeedActivity extends AppCompatActivity {
         userCommentFromFB = new ArrayList<>();
         userNameFromFB = new ArrayList<>();
         userImageFromFB = new ArrayList<>();
+        priceListFromFB = new ArrayList<>();
+        categoryFromFB = new ArrayList<>();
+        saticiAdiFromFB = new ArrayList<>();
 
         getDataFromFirestore();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        saticiFeedRecyclerAdapter = new SaticiFeedRecyclerAdapter(userNameFromFB,userCommentFromFB,userImageFromFB);
+        saticiFeedRecyclerAdapter = new SaticiFeedRecyclerAdapter(userNameFromFB,userCommentFromFB,userImageFromFB,priceListFromFB,categoryFromFB,saticiAdiFromFB);
         recyclerView.setAdapter(saticiFeedRecyclerAdapter);
 
 
@@ -125,12 +131,18 @@ public class SaticiFeedActivity extends AppCompatActivity {
                         String productName = (String) data.get("product_name");
                         String productCommand = (String) data.get("product_command");
                         String downloadUrl = (String) data.get("downloadUrl");
+                        String price = (String) data.get("price");
+                        String category = (String) data.get("categories");
+                        String saticiAdi = (String) data.get("businessName");
 
-                        System.out.println(productName);
+
 
                         userCommentFromFB.add(productCommand);
                         userImageFromFB.add(downloadUrl);
                         userNameFromFB.add(productName);
+                        priceListFromFB.add(price);
+                        categoryFromFB.add(category);
+                        saticiAdiFromFB.add(saticiAdi);
 
                         saticiFeedRecyclerAdapter.notifyDataSetChanged();
 
